@@ -140,7 +140,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "1/27/26 Fresh Marlin 2.1.2.6 E3P"
+#define CUSTOM_MACHINE_NAME "BLTOUCH 1/27/26 Fresh Marlin 2.1.2.6 E3P"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -1513,7 +1513,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -44, -14, -3 }
+#define NOZZLE_TO_PROBE_OFFSET { -44, -14, -2.25 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
