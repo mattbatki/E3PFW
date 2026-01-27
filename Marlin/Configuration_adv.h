@@ -1626,9 +1626,9 @@
     #define SDSORT_LIMIT       40     // Maximum number of sorted items (10-256). Costs 27 bytes each.
     #define SDSORT_FOLDERS     -1     // -1=above  0=none  1=below
     #define SDSORT_GCODE       false  // Enable G-code M34 to set sorting behaviors: M34 S<-1|0|1> F<-1|0|1>
-    #define SDSORT_USES_RAM    true   // Pre-allocate a static array for faster pre-sorting.
+    #define SDSORT_USES_RAM    true  // Pre-allocate a static array for faster pre-sorting.
     #define SDSORT_USES_STACK  false  // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
-    #define SDSORT_CACHE_NAMES true   // Keep sorted items in RAM longer for speedy performance. Most expensive option.
+    #define SDSORT_CACHE_NAMES true  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
     #define SDSORT_DYNAMIC_RAM false  // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
     #define SDSORT_CACHE_VFATS 2      // Maximum number of 13-byte VFAT entries to use for sorting.
                                       // Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
@@ -1787,7 +1787,7 @@
 
   // A bigger font is available for edit items. Costs 3120 bytes of flash.
   // Western only. Not available for Cyrillic, Kana, Turkish, Greek, or Chinese.
-  #define USE_BIG_EDIT_FONT
+  //#define USE_BIG_EDIT_FONT
 
   // A smaller font may be used on the Info Screen. Costs 2434 bytes of flash.
   // Western only. Not available for Cyrillic, Kana, Turkish, Greek, or Chinese.
@@ -2069,15 +2069,15 @@
 #define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define INTEGRATED_BABYSTEPPING         // EXPERIMENTAL integration of babystepping into the Stepper ISR
-  //#define BABYSTEP_WITHOUT_HOMING
-  //#define BABYSTEP_ALWAYS_AVAILABLE       // Allow babystepping at all times (not just during movement)
+  #define BABYSTEP_WITHOUT_HOMING
+  #define BABYSTEP_ALWAYS_AVAILABLE       // Allow babystepping at all times (not just during movement)
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
   #define BABYSTEP_INVERT_Z false           // Change if Z babysteps should go the other way
   //#define BABYSTEP_MILLIMETER_UNITS       // Specify BABYSTEP_MULTIPLICATOR_(XY|Z) in mm instead of micro-steps
   #define BABYSTEP_MULTIPLICATOR_Z  1       // (steps or mm) Steps or millimeter distance for each Z babystep
   #define BABYSTEP_MULTIPLICATOR_XY 1       // (steps or mm) Steps or millimeter distance for each XY babystep
 
-  #define DOUBLECLICK_FOR_Z_BABYSTEPPING    // Double-click on the Status Screen for Z Babystepping.
+  #define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
@@ -2087,9 +2087,9 @@
     #endif
   #endif
 
-  //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
+  #define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-  //#define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
+  #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
     //#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
     //#define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor
@@ -2118,7 +2118,7 @@
   #if ENABLED(DISTINCT_E_FACTORS)
     #define ADVANCE_K { 0.0 }     // (mm) Compression length per 1mm/s extruder speed, per extruder
   #else
-    #define ADVANCE_K 0.0         // (mm) Compression length applying to all extruders
+    #define ADVANCE_K 0.05         // (mm) Compression length applying to all extruders
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
@@ -2493,7 +2493,7 @@
 
 /**
  * Set the number of proportional font spaces required to fill up a typical character space.
- * This can help to better align the output of commands like 'G29 O' Mesh Output.
+ * This can help to better align the output of commands like `G29 O` Mesh Output.
  *
  * For clients that use a fixed-width font (like OctoPrint), leave this set to 1.0.
  * Otherwise, adjust according to your client and font.
@@ -2735,7 +2735,7 @@
 
   #if AXIS_IS_TMC_CONFIG(X)
     #define X_CURRENT       580        // (mA) RMS current. Multiply by 1.414 for peak current.
-    #define X_CURRENT_HOME  (X_CURRENT/2)  // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
+    #define X_CURRENT_HOME  (X_CURRENT/2)  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.11     // Multiplied x1000 for TMC26X
     #define X_CHAIN_POS      -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
@@ -2775,7 +2775,7 @@
 
   #if AXIS_IS_TMC_CONFIG(Z)
     #define Z_CURRENT       580
-    #define Z_CURRENT_HOME  Z_CURRENT
+    #define Z_CURRENT_HOME  (Z_CURRENT/2)
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
     #define Z_CHAIN_POS      -1
@@ -3291,7 +3291,7 @@
   //#define PHOTOGRAPH_PIN 23
 
   // Canon Hack Development Kit
-  // https://web.archive.org/web/20200920094805/captain-slow.dk/2014/03/09/3d-printing-timelapses/
+  // https://web.archive.org/web/20200920094805/https://captain-slow.dk/2014/03/09/3d-printing-timelapses/
   //#define CHDK_PIN        4
 
   // Optional second move with delay to trigger the camera shutter
@@ -3323,7 +3323,7 @@
  * Add the M3, M4, and M5 commands to turn the spindle/laser on and off, and
  * to set spindle speed, spindle direction, and laser power.
  *
- * SuperPID is a router/spindle speed controller used in the CNC milling community.
+ * SuperPid is a router/spindle speed controller used in the CNC milling community.
  * Marlin can be used to turn the spindle on and off. It can also be used to set
  * the spindle speed from 5,000 to 30,000 RPM.
  *
@@ -3671,14 +3671,12 @@
 
 // @section reporting
 
-/**
- * Extra options for the M114 "Current Position" report
- */
-#define M114_DETAIL           // Use 'M114` for details to check planner calculations
+// Extra options for the M114 "Current Position" report
+#define M114_DETAIL         // Use 'M114` for details to check planner calculations
 //#define M114_REALTIME       // Real current position based on forward kinematics
 //#define M114_LEGACY         // M114 used to synchronize on every call. Enable if needed.
 
-#define REPORT_FAN_CHANGE     // Report the new fan speed when changed by M106 (and others)
+#define REPORT_FAN_CHANGE   // Report the new fan speed when changed by M106 (and others)
 
 // @section gcode
 
@@ -4010,8 +4008,7 @@
 
 /**
  * Instant freeze / unfreeze functionality
- * Potentially useful for rapid stop that allows being resumed. Halts stepper movement.
- * Note this does NOT pause spindles, lasers, fans, heaters or any other auxiliary device.
+ * Potentially useful for emergency stop that allows being resumed.
  * @section interface
  */
 //#define FREEZE_FEATURE
