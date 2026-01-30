@@ -20,7 +20,8 @@
  *
  */
 #pragma once
-
+// Name displayed in the LCD "Ready" message and Info menu
+#define CUSTOM_MACHINE_NAME "Upgraded Duct 1/30/26"
 #define CONFIG_EXAMPLES_DIR "Creality/Ender-3 Pro/BigTreeTech SKR Mini E3 3.0"
 
 /**
@@ -138,9 +139,6 @@
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
-
-// Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "MPC flash"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -1523,8 +1521,8 @@
 //mS_BLTouch - Mount on lower two front fan holes - fan slightly proud so call it 47Probe offset: { 0, -46, 0 }
 //Y offset can range from -46 to -48 depending on fan thickness
 //-3.15 for glass
-#define NOZZLE_TO_PROBE_OFFSET {0, -46, -3.15}
-
+#define NOZZLE_TO_PROBE_OFFSET {0, -48, -2.525}
+//needs tuning i mightve shaved off part of the nozzle
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
 #define PROBING_MARGIN 10
