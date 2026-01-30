@@ -716,11 +716,11 @@
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
 
   // Measured physical constants from M306
-  #define MPC_BLOCK_HEAT_CAPACITY { 16.7f }           // (J/K) Heat block heat capacities.
-  #define MPC_SENSOR_RESPONSIVENESS { 0.22f }         // (K/s per ∆K) Rate of change of sensor temperature from heat block.
-  #define MPC_AMBIENT_XFER_COEFF { 0.068f }           // (W/K) Heat transfer coefficients from heat block to room air with fan off.
+  #define MPC_BLOCK_HEAT_CAPACITY { 13.99f }           // (J/K) Heat block heat capacities.
+  #define MPC_SENSOR_RESPONSIVENESS { 0.2868f }         // (K/s per ∆K) Rate of change of sensor temperature from heat block.
+  #define MPC_AMBIENT_XFER_COEFF { 0.0895f }           // (W/K) Heat transfer coefficients from heat block to room air with fan off.
   #if ENABLED(MPC_INCLUDE_FAN)
-    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.097f }  // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
+    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.1159f }  // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
   #endif
 
   // For one fan and multiple hotends MPC needs to know how to apply the fan cooling effect.
@@ -776,10 +776,16 @@
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
-
+  /*  MAGNETIC BED
   #define DEFAULT_BED_KP 50.71
   #define DEFAULT_BED_KI 9.88
   #define DEFAULT_BED_KD 173.43
+  */
+
+  //Glass Bed (Live)
+  #define DEFAULT_BED_KP 119.18
+  #define DEFAULT_BED_KI 22.92
+  #define DEFAULT_BED_KD 413.16
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1513,7 +1519,11 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -44, -14, -2.25}
+//https://www.printables.com/model/201332-mini-satsana-a-compact-fan-duct-for-creality-print/files - my duct rn 1/30/26
+//mS_BLTouch - Mount on lower two front fan holes - fan slightly proud so call it 47Probe offset: { 0, -46, 0 }
+//Y offset can range from -46 to -48 depending on fan thickness
+//-3.15 for glass
+#define NOZZLE_TO_PROBE_OFFSET {0, -46, -3.15}
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
