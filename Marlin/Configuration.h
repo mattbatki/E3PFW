@@ -21,7 +21,7 @@
  */
 #pragma once
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Upgraded Duct 1/30/26 Assisted Tramming"
+#define CUSTOM_MACHINE_NAME "Upgraded Duct 2/1/26 Probing Margin"
 #define CONFIG_EXAMPLES_DIR "Creality/Ender-3 Pro/BigTreeTech SKR Mini E3 3.0"
 
 /**
